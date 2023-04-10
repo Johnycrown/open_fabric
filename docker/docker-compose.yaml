@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  app:
+    image: 'openfabric-image'
+    build:
+      context: .
+    ports:
+      - "8082:8080"
+    container_name: open_fabric_test
+    depends_on:
+      - worker
+    environment:
+      - SPRING_DATASOURCE_URL=${env.SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${env.SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${env.SPRING_DATASOURCE_PASSWORD}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  worker:
+    image: 'postgres:latest'
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password

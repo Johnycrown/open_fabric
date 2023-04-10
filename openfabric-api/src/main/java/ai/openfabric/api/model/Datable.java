@@ -10,7 +10,7 @@ import java.util.Date;
 
 
 @MappedSuperclass
-public class Datable implements Serializable {
+public class  Datable implements Serializable {
 
     @ApiModelProperty(hidden = true)
     public Date createdAt;
