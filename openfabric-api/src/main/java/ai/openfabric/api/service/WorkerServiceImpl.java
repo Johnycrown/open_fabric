@@ -26,8 +26,6 @@ public class WorkerServiceImpl implements WorkerService {
     private final DockerClient dockerClient;
 
 
-
-
     @Override
     public void startWorker(String id) throws Exception {
         Worker worker = workerRepository.findById(id).orElseThrow(() -> new WorkNotFoundException("Worker  with id " + id + " not found"));
@@ -42,11 +40,9 @@ public class WorkerServiceImpl implements WorkerService {
             worker.setStatus("Running");
             worker.setId(containerId);
             workerRepository.save(worker);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-
-
 
 
     }
@@ -80,6 +76,7 @@ public class WorkerServiceImpl implements WorkerService {
         // I am unable to implement this because I could not access Stats class and  ContainerStatsCallback from java docker api integration provided
 
     }
+
     public Page<Worker> getWorkers(Pageable pageable) {
         return workerRepository.findAll(pageable);
     }

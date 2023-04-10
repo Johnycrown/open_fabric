@@ -20,23 +20,39 @@ public class WorkerController {
 
 
     @PostMapping(path = "/hello")
-    public @ResponseBody String hello(@RequestBody String name) {
+    public @ResponseBody
+    String hello(@RequestBody String name) {
         return "Hello!" + name;
     }
 
     @PostMapping(path = "/start")
-    public ResponseEntity<?>  startContainer(@RequestBody String id) throws Exception {
+    public ResponseEntity<?> startContainer(@RequestBody String id) throws Exception {
         workerService.startWorker(id);
         return ResponseEntity.ok().body("worker has been succesfully started");
 
     }
-    @GetMapping(path ="/list-of-workers")
-    public ResponseEntity<?>  fetchImage(Pageable pageable){
+
+    @GetMapping(path = "/all")
+    public ResponseEntity<?> listWorkers(Pageable pageable) {
         return ResponseEntity.ok().body(workerService.getWorkers(pageable));
     }
+
     @PostMapping(path = "/create")
-    public ResponseEntity<?> createWorker(@RequestBody Worker worker){
+    public ResponseEntity<?> createWorker(@RequestBody Worker worker) {
         return ResponseEntity.ok().body(workerService.createWorker(worker));
+    }
+
+    @PostMapping(path = "/stop")
+    public ResponseEntity<?> stopContainer(@RequestBody String id) throws Exception {
+
+        return ResponseEntity.ok().body(workerService.stopWorker(id));
+
+    }
+    @PostMapping(path = "/information")
+    public ResponseEntity<?> workerInformation(@RequestBody String id) throws Exception {
+
+        return ResponseEntity.ok().body(workerService.getWorkerInfo(id));
+
     }
 
 
