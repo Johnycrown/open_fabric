@@ -12,5 +12,6 @@ public interface WorkerService {
     // I make this void because I have not implement it
     void getWorkerStatistics(String id) throws WorkNotFoundException;
     Page<Worker> getWorkers(Pageable pageable);
+    Worker       createWorker(Worker worker);
 
 }

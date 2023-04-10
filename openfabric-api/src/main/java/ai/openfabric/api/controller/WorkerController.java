@@ -3,6 +3,7 @@ package ai.openfabric.api.controller;
 import ai.openfabric.api.model.Worker;
 import ai.openfabric.api.repository.WorkerRepository;
 import ai.openfabric.api.service.WorkerService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,6 @@ public class WorkerController {
 
     @PostMapping(path = "/hello")
     public @ResponseBody String hello(@RequestBody String name) {
-        workerService.registerNewWorkers();
         return "Hello!" + name;
     }
 
@@ -30,13 +30,13 @@ public class WorkerController {
         return ResponseEntity.ok().body("worker has been succesfully started");
 
     }
-    @GetMapping(path ="/all")
-    public ResponseEntity<?>  fetchImage(){
-        return ResponseEntity.ok().body(workerRepository.findAll());
+    @GetMapping(path ="/list-of-workers")
+    public ResponseEntity<?>  fetchImage(Pageable pageable){
+        return ResponseEntity.ok().body(workerService.getWorkers(pageable));
     }
     @PostMapping(path = "/create")
-    public ResponseEntity<?> createWorker(@RequestBody Worker work){
-        return ResponseEntity.ok().body(workerRepository.save(work));
+    public ResponseEntity<?> createWorker(@RequestBody Worker worker){
+        return ResponseEntity.ok().body(workerService.createWorker(worker));
     }
 
 

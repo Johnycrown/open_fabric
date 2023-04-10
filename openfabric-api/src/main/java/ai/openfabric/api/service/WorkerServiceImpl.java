@@ -84,7 +84,10 @@ public class WorkerServiceImpl implements WorkerService {
         return workerRepository.findAll(pageable);
     }
 
-
+    @Override
+    public Worker createWorker(Worker worker) {
+        return workerRepository.save(worker);
+    }
 
 
 }

@@ -1,5 +1,0 @@
--- create database open_fabric_db;
---
--- create user 'open_fabric_user'@'localhost' identified by 'Open_fabric@123';
--- grant all privileges on open_fabric_db.* to 'open_fabric_user'@'localhost';
--- flush privileges;
